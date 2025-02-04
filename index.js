@@ -3,7 +3,18 @@ const app = express()
 const morgan = require('morgan')
 
 app.use(express.json())
-app.use(morgan('tiny'))
+
+// Making sure the body has a name and number, otherwise return "-"
+morgan.token('body', (request) => {
+    if (request.body.name && request.body.number) {
+        return JSON.stringify( {name: request.body.name , number: request.body.number} )
+    }
+    return '-'
+})
+
+
+//app.use(morgan('tiny'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 let persons = [
     {
