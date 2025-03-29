@@ -94,8 +94,8 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
-
-    const person = request.body
+    console.log("body", body)
+    //const person = request.body
 
     if (!body.name) {
         return response.status(400).json({
@@ -109,20 +109,29 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    const nameExists = persons.some(person => person.name === body.name)
+    /*const nameExists = persons.some(person => person.name === body.name)
 
     if (nameExists) {
         return response.status(400).json({
             error: 'name must be unique'
         })
     }
+    */
 
-    const id = Math.floor(Math.random() * 100000)
-    person.id = String(id)
+    const person = new Person({
+        name: body.name,
+        number: body.number
+    })
+
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
+    //const id = Math.floor(Math.random() * 100000)
+    //person.id = String(id)
     
-    persons = persons.concat(person)
+    //persons = persons.concat(person)
 
-    response.json(person)
+    //response.json(person)
 })
 
 
