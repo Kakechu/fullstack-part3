@@ -21,7 +21,6 @@
   "homepage": "https://github.com/Kakechu/fullstack-part3#readme",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.11.0",
