@@ -7,12 +7,12 @@ const url = process.env.MONGODB_URI
 console.log('connecting to', url)
 
 mongoose.connect(url)
-    .then(result => {
-        console.log('connected to MongoDB')
-    })
-    .catch((error) => {
-        console.log('error connecting to MongoDB:', error.message)
-    })
+  .then(
+    console.log('connected to MongoDB')
+  )
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
 
 const personSchema = new mongoose.Schema({
   name: {
@@ -28,7 +28,7 @@ const personSchema = new mongoose.Schema({
       {
         validator: function(v) {
           const parts = v.split('-')
-          
+
           // Vain 2 osaa eli vain yksi väliviiva
           if (parts.length !== 2) {
             return false
@@ -48,7 +48,7 @@ const personSchema = new mongoose.Schema({
 
           return true
         },
-        
+
         message: props => `${props.value} is invalid! The number must consist of two parts, separated by a hyphen. The first part must contain 2 or 3 numbers.`
       }
   }
@@ -57,12 +57,12 @@ const personSchema = new mongoose.Schema({
 
 
 personSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-      returnedObject.id = returnedObject._id.toString()
-      delete returnedObject._id
-      delete returnedObject.__v
-    }
-  })
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 
 
 module.exports = mongoose.model('Person', personSchema)
