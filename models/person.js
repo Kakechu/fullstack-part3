@@ -54,8 +54,6 @@ const personSchema = new mongoose.Schema({
   }
 })
 
-
-
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
@@ -66,4 +64,3 @@ personSchema.set('toJSON', {
 
 
 module.exports = mongoose.model('Person', personSchema)
-
