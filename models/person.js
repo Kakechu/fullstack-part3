@@ -14,18 +14,6 @@ mongoose.connect(url)
         console.log('error connecting to MongoDB:', error.message)
     })
 
-/*
-const personSchema = new mongoose.Schema({
-  name: String,
-  number: String
-})
-*/
-        /*
-koostua kahdesta väliviivalla erotetusta osasta joissa ensimmäisessä osassa on 2 tai 3 numeroa ja toisessa osassa riittävä määrä numeroita
-
-esim. 09-1234556 ja 040-22334455 ovat oikeassa muodossa
-esim. 1234556, 1-22334455 ja 10-22-334455 eivät ole kelvollisia
-        */
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
